@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Game of Things</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,800" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</head>
+<body>
+    <div id="gameArea" class="w3-display-container">
+        <div id="join-card" class="w3-panel w3-card w3-display-middle w3-white w3-round-large">
+            <div id="logo" class="w3-display-center"><h1 id="title">Game of Things</h1></div>
+            <div class="w3-display-center"><p id="explainer"></p></div>
+            <div class="w3-display-center flex-container" id="players" style="display:none;"></div>
+            <div id="thing-id-input" class="w3-display-center"><input id="thing-id-input-box" class="w3-input w3-light-gray w3-border-0" type="text" placeholder="Enter a thing-id here"><input id="username-input-box" class="w3-input w3-light-gray w3-border-0" type="text" placeholder="Enter a username here" style="display:none;"></div>
+            <div id="submit-id"><button class="w3-button w3-round-large w3-hover-blue" id="submit-thing-id">Join</button>   <button class="w3-button w3-round-large w3-hover-blue" id="submit-username" style="display:none;">Join</button> <button class="w3-button w3-round-large w3-hover-blue" id="start-game" style="display:none;">Start</button></div>
+            <div id="host-a-thing" class=""><p><a href="#">Host a thing</a></p></div>
+        </div>
+
+        <div id="hostscreen">
+            <div id="hosttopbar">
+                <h1 id="hostthing"></h1>
+            </div>
+            <div class="flex-container-host" id="flex-container-host">
+                
+            </div>
+            <div id="hostbottombar">
+                <h1 id="revealresponses">Reveal Responses</h1>
+                <h1 id="newthing">New Thing</h1>
+            </div>
+        </div>
+
+        <div id="playerscreen">
+            <div id="playertopbar" style="display: none;">
+                <h1 id="playername"></h1>
+            </div>
+
+            <div class="playerresponse w3-display-middle">
+                <textarea id="playerresponseinputbox" placeholder="Type a thing here"></textarea>
+            </div>
+            <div id="submitresponse">
+                <h1 id="submitresponsetext" class="w3-display-middle">Submit</h1>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

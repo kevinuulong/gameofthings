@@ -1,0 +1,186 @@
+html, body{
+    margin: 0px;
+}
+
+input:focus, textarea:focus, button:focus{
+    outline: none;
+}
+
+#gameArea{
+    background-color: #52eaa8;
+    width: 100vw;
+    height: 100vh;
+}
+
+#thing-id-input{
+    width: 50vmin;
+    font-family: 'Montserrat', sans-serif;
+    margin: auto;
+}
+#thing-id-input-box, #username-input-box{
+    border-radius: 10vmin;
+    padding-left: 3vmin;
+    padding-right: 3vmin;
+}
+#submit-thing-id, #submit-username, #start-game{
+    margin-bottom: 10vmin;
+    background-color: #448afc;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#submit-id{
+    text-align: center;
+    margin-top: 20px;
+    height: 30px;
+    margin-bottom: 20px;
+}
+
+#submit-thing-id:hover{
+    background-color: white;
+}
+
+#join-card{
+    width: 85vmin;
+    z-index: 10;
+}
+
+#title{
+    font-size: 7vmin;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    padding-top: 6vmin;
+    text-align: center;
+}
+#host-a-thing{
+    color: #448afc;
+    text-align: center;
+
+}
+
+#explainer{
+    text-align: center;
+}
+
+.flex-container{
+    display: none;
+    flex-wrap: wrap;
+}
+
+.flex-container > div{
+    margin: 10px;
+}
+
+#hostscreen{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    display: none;
+}
+
+#hosttopbar{
+    width: 100vw;
+    background-color: #41b381;
+    position: absolute;
+    top: 0px;
+    text-align: center;
+}
+
+#hostthing{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: white;
+}
+
+.flex-container-host{
+    display: flex;
+    margin-top: 15vh;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+.flex-container-host > div{
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    max-width: 150px;
+    min-width: 100px;
+    max-height: 50vh;
+    text-align: center;
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.301);
+}
+
+#playerscreen{
+    display: none;
+}
+
+#playerresponseinputbox{
+    width: 75vw;
+    min-height: 75vh;
+    background-color: #41b381;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    resize: none;
+    border-radius: 25px;
+    padding: 25px;
+}
+
+.playerresponse{
+    text-align: center;
+}
+
+#submitresponse{
+    position: absolute;
+    bottom: 0px;
+    margin: 0px;
+    left: 0px;
+    background-color: #448afc;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    height: 10vh;
+    width: 100vw;
+    text-align: center;
+    cursor: pointer;
+}
+
+#submitresponsetext{
+    margin: 0px;
+    font-weight: 600;
+}
+
+#revealresponses{
+    width: 50%;
+    position: absolute;
+    bottom: 0px;
+    margin: 0px;
+    left: 0px;
+    background-color: #448afc;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    height: 10vh;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#newthing{
+    width: 50%;
+    position: absolute;
+    bottom: 0px;
+    margin: 0px;
+    right: 0px;
+    background-color: coral;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    height: 10vh;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
+}
