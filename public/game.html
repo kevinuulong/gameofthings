@@ -12,6 +12,22 @@
     <script src="client.js"></script>
 </head>
 <body>
+    <script>
+        var elem = document.documentElement;
+        elem.addEventListener('click', function(){
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { /* Firefox */
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                elem.msRequestFullscreen();
+            }
+        });
+        
+    </script>
+        
     <div id="gameArea" class="w3-display-container">
         <div id="join-card" class="w3-panel w3-card w3-display-middle w3-white w3-round-large">
             <div id="logo" class="w3-display-center"><h1 id="title">Game of Things</h1></div>
