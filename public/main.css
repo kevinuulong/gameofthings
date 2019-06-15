@@ -7,9 +7,30 @@ input:focus, textarea:focus, button:focus{
 }
 
 #gameArea{
-    background-color: #52eaa8;
+    background: linear-gradient(270deg, #FA8BFF, #2BD2FF, #2BFF88);
+    background-size: 400% 400%;
+
+    -webkit-animation: backgroundgradient 30s ease infinite;
+    -moz-animation: backgroundgradient 30s ease infinite;
+    animation: backgroundgradient 30s ease infinite;
     width: 100vw;
     height: 100vh;
+}
+
+@-webkit-keyframes backgroundgradient {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes backgroundgradient {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes backgroundgradient { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }
 
 #thing-id-input{
@@ -83,7 +104,7 @@ input:focus, textarea:focus, button:focus{
 
 #hosttopbar{
     width: 100vw;
-    background-color: #41b381;
+    background-color: #00000042;
     position: absolute;
     top: 0px;
     text-align: center;
@@ -123,7 +144,7 @@ input:focus, textarea:focus, button:focus{
 #playerresponseinputbox{
     width: 75vw;
     min-height: 75vh;
-    background-color: #41b381;
+    background-color: #00000042;
     color: white;
     font-family: 'Montserrat', sans-serif;
     border: none;
@@ -183,4 +204,16 @@ input:focus, textarea:focus, button:focus{
     text-align: center;
     cursor: pointer;
     font-weight: 600;
+}
+
+#playerresponsecount{
+    display: none;
+    font-weight: 600;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: white;
 }

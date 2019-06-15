@@ -79,12 +79,25 @@ window.onload= function(){
 
     document.getElementById("submitresponse").addEventListener("click", function(){
         socket.emit('receiveResponse', {
-            response: document.getElementById("playerresponseinputbox").value
+            response: document.getElementById("playerresponseinputbox").value,
+            room: document.getElementById("thing-id-input-box").value
         });
         document.getElementById("playerscreen").style.display = "none";
+        document.getElementById("playerresponsecount").style.display = "block";
     });
+
+    socket.on('responsecount', function(data){
+        if (data.count == 1){
+            document.getElementById("playerresponsecount").innerHTML = data.count + ' thing received';
+        } else{
+            document.getElementById("playerresponsecount").innerHTML = data.count + ' things received';
+        }
+        
+    });
+
     socket.on('displayresponses', function(data){
         var responses = data.shuffled;
+        document.getElementById("playerresponsecount").style.display = "none";
         console.log(responses);
         for (i = 0; i < responses.length; i++){
             document.getElementById("flex-container-host").innerHTML += "<div onclick='remove(this);'>"+ responses[i]+"</div>";
