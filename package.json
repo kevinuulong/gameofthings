@@ -4,7 +4,6 @@
   "description": "The online-ish version of the game of things.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "next build"
   },
   "author": "kevinlong",
