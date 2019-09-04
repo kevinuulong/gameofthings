@@ -4,7 +4,7 @@
   "description": "The online-ish version of the game of things.",
   "main": "index.js",
   "scripts": {
-    "build": "node index.js"
+    "start": "node index.js"
   },
   "author": "kevinlong",
   "license": "ISC",
