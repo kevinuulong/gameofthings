@@ -1,6 +1,6 @@
 var express = require('express'),
     app = express(),
-    server = app.listen(5000, '0.0.0.0', function(){
+    server = app.listen(process.env.port || 5000, '0.0.0.0', function(){
         console.log("connected to port 5000")
     }),
     io = require('socket.io') (server)
@@ -102,4 +102,4 @@ io.on('connection', function(socket){
     });
 });
 
-server.listen(5000);
+server.listen(process.env.port || 5000);
