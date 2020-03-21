@@ -3,7 +3,7 @@ function remove(element){
 }
 
 window.onload= function(){
-    var socket = io('mp185dgt:5000'),
+    var socket = io('mp185dgt:5000',{'forceNew':true}),
         host = document.getElementById("host-a-thing"),
         join = document.getElementById("submit-id"), //probably not needed anymore
         hostscreen = false;

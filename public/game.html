@@ -26,6 +26,9 @@
             }
         });
         
+        function lowercase(letter){
+            letter.value = letter.value.toLowerCase();
+        }
     </script>
         
     <div id="gameArea" class="w3-display-container">
@@ -33,7 +36,7 @@
             <div id="logo" class="w3-display-center"><h1 id="title">Game of Things</h1></div>
             <div class="w3-display-center"><p id="explainer"></p></div>
             <div class="w3-display-center flex-container" id="players" style="display:none;"></div>
-            <div id="thing-id-input" class="w3-display-center"><input id="thing-id-input-box" class="w3-input w3-light-gray w3-border-0" type="text" placeholder="Enter a thing-id here"><input id="username-input-box" class="w3-input w3-light-gray w3-border-0" type="text" placeholder="Enter a username here" style="display:none;"></div>
+            <div id="thing-id-input" class="w3-display-center"><input id="thing-id-input-box" class="w3-input w3-light-gray w3-border-0" type="text" placeholder="Enter a thing-id here" onkeyup="return lowercase(this);"><input id="username-input-box" class="w3-input w3-light-gray w3-border-0" type="text" placeholder="Enter a username here" style="display:none;"></div>
             <div id="submit-id"><button class="w3-button w3-round-large w3-hover-blue" id="submit-thing-id">Join</button>   <button class="w3-button w3-round-large w3-hover-blue" id="submit-username" style="display:none;">Join</button> <button class="w3-button w3-round-large w3-hover-blue" id="start-game" style="display:none;">Start</button></div>
             <div id="host-a-thing" class=""><p><a href="#">Host a thing</a></p></div>
         </div>
