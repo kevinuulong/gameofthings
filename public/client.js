@@ -3,7 +3,8 @@ function remove(element){
 }
 
 window.onload= function(){
-    var socket = io('mp185dgt:5000',{'forceNew':true}),
+
+    var socket = io('thegameofthings.herokuapp.com',{'forceNew':true}), 
         host = document.getElementById("host-a-thing"),
         join = document.getElementById("submit-id"), //probably not needed anymore
         hostscreen = false;
