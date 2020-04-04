@@ -24,6 +24,20 @@ window.onload= function(){
         document.getElementById("host-a-thing").style.display = "none";
     });
 
+    socket.on('reloadCheck', function(){
+        var thingid = document.getElementById("thing-id-input-box").value,
+            username = document.getElementById("username-input-box").value;
+
+        console.log('reloadCheck')
+        if(thingid.length!=0&&username.length!=0){
+            socket.emit('joinGame', {
+                room: thingid,
+                username: username
+            });
+        }
+        
+    })
+
     document.getElementById("submit-username").addEventListener("click", function(){
         var thingid = document.getElementById("thing-id-input-box").value;
         socket.emit('joinGame', {
