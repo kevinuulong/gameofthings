@@ -117,6 +117,13 @@ io.on('connection', function(socket){
             shuffled: shuffle(responses)
         });
     });
+
+    socket.on('resendrequest', function(data){
+        console.log("resend requested");
+        io.to(data.room).emit('resend', {
+            thing: data.thing
+        })
+    })
 });
 
 server.listen(process.env.PORT || 5000);

@@ -6,13 +6,24 @@
     <title>Game of Things</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="w3.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,800" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/autoresize.jquery.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#212121">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#212121">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="#212121">
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js"></script>
 </head>
 <body>
     <script>
+        
         var elem = document.documentElement;
         elem.addEventListener('click', function(){
             if (elem.requestFullscreen) {
@@ -21,7 +32,7 @@
                 elem.mozRequestFullScreen();
             } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
                 elem.webkitRequestFullscreen();
-            } else if (elem.msRequestFullscreen) { /* IE/Edge */
+            } else if (elem.msRequestFullscreen) { /* IE/Old Edge */
                 elem.msRequestFullscreen();
             }
         });
@@ -29,44 +40,144 @@
         function lowercase(letter){
             letter.value = letter.value.toLowerCase();
         }
+        
+        var fromurl = getThingFromUrl()['id'];
+
+        function getThingFromUrl() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+
+        function remove(element){
+            element.parentNode.parentNode.removeChild(element.parentNode);
+            if(document.getElementsByClassName("answer").length == 0){
+                document.getElementById("things-screen").style.display = "none";
+                document.getElementById("thing-screen").style.display = "block";
+            }
+        }
+
     </script>
         
-    <div id="gameArea" class="w3-display-container">
-        <div id="join-card" class="w3-panel w3-card w3-display-middle w3-white w3-round-large">
-            <div id="logo" class="w3-display-center"><h1 id="title">Game of Things</h1></div>
-            <div class="w3-display-center"><p id="explainer"></p></div>
-            <div class="w3-display-center flex-container" id="players" style="display:none;"></div>
-            <div id="thing-id-input" class="w3-display-center"><input id="thing-id-input-box" class="w3-input w3-light-gray w3-border-0" type="text" placeholder="Enter a thing-id here" onkeyup="return lowercase(this);"><input id="username-input-box" class="w3-input w3-light-gray w3-border-0" type="text" placeholder="Enter a username here" style="display:none;"></div>
-            <div id="submit-id"><button class="w3-button w3-round-large w3-hover-blue" id="submit-thing-id">Join</button>   <button class="w3-button w3-round-large w3-hover-blue" id="submit-username" style="display:none;">Join</button> <button class="w3-button w3-round-large w3-hover-blue" id="start-game" style="display:none;">Start</button></div>
-            <div id="host-a-thing" class=""><p><a href="#">Host a thing</a></p></div>
+    <div id="gameArea">
+
+        <!-- Join Screen -->
+        <div id="join-screen">
+            <div class="card-center">
+                <p id="thing-id-label" class="label">thing-id</p>
+                <input id="thing-id" class="input" type="text">
+                <p id="username-label" class="label">username</p>
+                <input id="username" class="input" type="text">
+                <div id="join-button" class="random">join</div>
+                <script>
+                    if(fromurl!=undefined){
+                        document.getElementById("thing-id").value = fromurl;
+                    }
+                </script>
+            </div>
+            <p id="hostthing" class="fake-link">Host a thing</p>
+        </div>
+        
+
+        <!-- Host Screen -->
+        <div id="host-screen">
+            <div id="players">
+                <h1>players</h1>
+                <ul id="playerlist">
+
+                </ul>
+            </div>
+            <div id="join-info" class="random">
+
+                <h1 id="thing-id-host">thing-1</h1>
+
+                <p id="explainer">to join visit <u>things.games/join</u> and enter the thing-id or scan the code at the right</p>
+                <svg id="phone" viewBox="0 0 319 687" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <rect x="5" y="27" width="308" height="634" fill="white"/> <rect x="34" y="106" width="250" height="251" fill="url(#pattern0)"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M46.6228 0L272.277 0C298.026 0 318.9 20.9666 318.9 46.8303V640.17C318.9 666.033 298.026 687 272.277 687H46.6228C20.8737 687 0 666.033 0 640.17L0 46.8303C0 20.9666 20.8737 0 46.6228 0ZM37.2983 47.2986L279.737 47.2986C293.899 47.2986 305.379 58.8303 305.379 73.0553V635.019C305.379 649.244 293.899 660.775 279.737 660.775H37.2983C23.1363 660.775 11.6558 649.244 11.6558 635.019L11.6558 73.0553C11.6558 58.8303 23.1363 47.2986 37.2983 47.2986Z" fill="black"/> <path d="M86.9794 35.0708C89.5543 35.0708 91.6417 32.9741 91.6417 30.3877C91.6417 27.8014 89.5543 25.7047 86.9794 25.7047C84.4045 25.7047 82.3171 27.8014 82.3171 30.3877C82.3171 32.9741 84.4045 35.0708 86.9794 35.0708Z" stroke="#444444" stroke-width="2.03606" stroke-linecap="round" stroke-linejoin="round"/> <path d="M177.167 26.9274H144.531C143.243 26.9274 142.199 27.9757 142.199 29.2689V30.4396C142.199 31.7328 143.243 32.7812 144.531 32.7812H177.167C178.454 32.7812 179.498 31.7328 179.498 30.4396V29.2689C179.498 27.9757 178.454 26.9274 177.167 26.9274Z" stroke="#444444" stroke-width="2.03606" stroke-linecap="round" stroke-linejoin="round"/> <defs> <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1"> <use xlink:href="#image0" transform="translate(-0.002) scale(0.00669333)"/> </pattern>
+                    <image id="image0" width="150" height="150" xlink:href="https://quickchart.io/qr?text=http%3A%2F%2Fthegameofthings.herokuapp.com%2F%3Fid%3Dthing-1"/></defs>
+                </svg>
+                    
+                    
+            </div>
+            <div id="start-game">
+                <div id="start-button" class="random"><h1>start game</h1></div>
+            </div>
+            <script>
+                
+            </script>
         </div>
 
-        <div id="hostscreen">
-            <div id="hosttopbar">
-                <h1 id="hostthing"></h1>
+
+        <!-- Host Displaying Thing -->
+        <div id="thing-screen" class="random">
+            <div id="thing-card">
+                <h1 id="thing">Things paramedics shouldn't say to a patient on the way to the hospital</h1>
+                <div id="control-buttons">
+                    <svg id="shuffle" width="84" height="84" viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M34.5975 27.1425L7.4025 0L0 7.4025L27.1425 34.545L34.5975 27.1425ZM55.125 0L65.835 10.71L0 76.5975L7.4025 84L73.29 18.165L84 28.875V0H55.125ZM56.8575 49.4025L49.455 56.805L65.8875 73.2375L55.125 84H84V55.125L73.29 65.835L56.8575 49.4025Z" fill="#ffffff"/></svg>          
+                    <svg id="reveal" width="124" height="84" viewBox="0 0 124 84" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M61.6 0C33.6 0 9.688 17.416 0 42C9.688 66.584 33.6 84 61.6 84C89.6 84 113.512 66.584 123.2 42C113.512 17.416 89.6 0 61.6 0ZM61.6 70C46.144 70 33.6 57.456 33.6 42C33.6 26.544 46.144 14 61.6 14C77.056 14 89.6 26.544 89.6 42C89.6 57.456 77.056 70 61.6 70ZM61.6 25.2C52.304 25.2 44.8 32.704 44.8 42C44.8 51.296 52.304 58.8 61.6 58.8C70.896 58.8 78.4 51.296 78.4 42C78.4 32.704 70.896 25.2 61.6 25.2Z" fill="#ffffff"/></svg>
+                    <svg id="resend" width="84" height="84" viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M71.61 12.3375C67.7244 8.42545 63.103 5.3212 58.012 3.20371C52.921 1.08623 47.4613 -0.00259536 41.9475 4.64544e-06C18.7425 4.64544e-06 0 18.795 0 42C0 65.205 18.7425 84 41.9475 84C61.53 84 77.8575 70.6125 82.53 52.5H71.61C69.4473 58.64 65.4326 63.9575 60.1196 67.7189C54.8066 71.4803 48.4572 73.5002 41.9475 73.5C24.57 73.5 10.4475 59.3775 10.4475 42C10.4475 24.6225 24.57 10.5 41.9475 10.5C50.6625 10.5 58.4325 14.1225 64.1025 19.845L47.1975 36.75H83.9475V4.64544e-06L71.61 12.3375Z" fill="#ffffff"/></svg>
+                </div>
             </div>
-            <div class="flex-container-host" id="flex-container-host">
+        </div>
+
+
+        <!-- Host Displaying Responses -->
+        <div id="things-screen">
+            <h1 id="thing-results">Things paramedics shouldn't say to a patient on the way to the hospital</h1>
+            <div id="responses">
                 
             </div>
-            <div id="hostbottombar">
-                <h1 id="revealresponses">Reveal Responses</h1>
-                <h1 id="newthing">New Thing</h1>
-            </div>
         </div>
 
-        <div id="playerscreen">
-            <div id="playertopbar" style="display: none;">
-                <h1 id="playername"></h1>
-            </div>
-
-            <div class="playerresponse w3-display-middle">
-                <textarea id="playerresponseinputbox" placeholder="Type a thing here" maxlength="200"></textarea>
-            </div>
-            <div id="submitresponse">
-                <h1 id="submitresponsetext" class="w3-display-middle">Submit</h1>
-            </div>
+        <!-- Player Screen -->
+        <div id="player-screen" class="random">
+            <div id="player-thing-dialog" style="display: none;">
+                <div id="thing-card-player" >
+                    <h1 id="thing-player">Things paramedics shouldn't say to a patient on the way to the hospital</h1>
+                    
+                </div>
+                <textarea id="response-box" style=" bottom: 0;
+                                                        position: absolute;
+                                                        height: 50px;
+                                                        width: 100vw;
+                                                        left: 0;
+                                                        border: none;
+                                                        background: #141414;
+                                                        color: white;
+                                                        font-family: 'Montserrat', sans-serif;
+                                                        padding: 10px;
+                                                        font-size: 15px;"
+                    maxlength="240" placeholder="Type a thing then hit ↩️"></textarea>
+                    <script>
+                    $('textarea').autoResize();
+                    </script>
+                </div>
+            <h1 id="count">5 things submitted</h1>
+            <h1 id="waiting">waiting for the host to start the game</h1>
         </div>
-        <div id="playerresponsecount"></div>
     </div>
+
+    <script>
+
+        //Adds random colors from a list to each element with class "random":
+
+        var colors = [];
+
+        function randomcolor(){
+            if(colors.length==0){
+                colors = ['#f2994a','#bb6bd9','#27ae60',"#2d9cdb","#eb5757"];
+            }
+            var index = Math.floor(Math.random() * colors.length);
+            var color = colors[index];
+            colors.splice(index,1);
+            return color;
+        }
+
+        Array.from(document.getElementsByClassName('random')).forEach(element => {
+            element.style.background = randomcolor();//colors[Math.floor(Math.random() * colors.length)];
+        });
+
+    </script>
 </body>
 </html>

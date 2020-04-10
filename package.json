@@ -1,6 +1,6 @@
 {
   "name": "gameofthings",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "The online-ish version of the game of things.",
   "main": "index.js",
   "scripts": {
